@@ -1,0 +1,13 @@
+unit UnitFunctions;
+
+interface
+
+implementation
+
+function TFormMain.ChangeText(var Text: String; TheType: TheMisspelled): Boolean;
+var changed: Boolean;
+begin
+
+end;
+
+end.

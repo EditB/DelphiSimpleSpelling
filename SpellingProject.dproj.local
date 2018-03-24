@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/03/08 05:53:17.000.311,=C:\Users\Edit\Delphi Projects\Unit1.pas</Transaction>
+    <Transaction>2018/03/08 05:54:38.000.960,C:\Users\Edit\Delphi Projects\Unit1.pas=C:\Users\Edit\Delphi Projects\SimpleSpelling\SimpleSpelling.pas</Transaction>
+    <Transaction>2018/03/08 05:54:38.000.960,C:\Users\Edit\Delphi Projects\Unit1.fmx=C:\Users\Edit\Delphi Projects\SimpleSpelling\SimpleSpelling.fmx</Transaction>
+    <Transaction>2018/03/08 06:09:00.000.330,C:\Users\Edit\Delphi Projects\Project1.dproj=C:\Users\Edit\Delphi Projects\SimpleSpelling\Project1.dproj</Transaction>
+    <Transaction>2018/03/09 11:25:27.000.895,C:\Users\Edit\Delphi Projects\SimpleSpelling\Project1.dproj=C:\Users\Edit\Delphi Projects\SimpleSpelling\SpellingProject.dproj</Transaction>
+    <Transaction>2018/03/25 08:45:19.694,=C:\Users\Edit\Delphi Projects\SimpleSpelling\Unit1.pas</Transaction>
+    <Transaction>2018/03/25 08:46:11.181,C:\Users\Edit\Delphi Projects\SimpleSpelling\UnitFunctions.pas=C:\Users\Edit\Delphi Projects\SimpleSpelling\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

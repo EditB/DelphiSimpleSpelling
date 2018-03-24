@@ -1,0 +1,227 @@
+unit SimpleSpelling;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.StdCtrls, FMX.Colors,
+  System.StrUtils;
+
+type
+  TheMisSpelled = (TEH, ETH, EHT);
+  TFormMain = class(TForm)
+    MemoBox: TMemo;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    ColorButtonLoad: TColorButton;
+    ColorButtonSave: TColorButton;
+    ColorButtonCorrect: TColorButton;
+    LabelLoad: TLabel;
+    LabelSave: TLabel;
+    LabelCorrect: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure LabelLoadClick(Sender: TObject);
+    function ChangeText(var Text: String; theType: TheMisSpelled): Boolean;
+    procedure LabelSaveClick(Sender: TObject);
+    procedure ColorButtonLoadClick(Sender: TObject);
+    procedure ColorButtonSaveClick(Sender: TObject);
+    procedure ColorButtonCorrectClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormMain: TFormMain;
+  openDialog : TOpenDialog;
+  fileName : String;
+  fileData : TStringList;
+
+implementation
+
+{$R *.fmx}
+
+procedure TFormMain.ColorButtonCorrectClick(Sender: TObject);
+var
+  text : String;
+  line : Integer;
+  changeCounts : Array[TEH..EHT] of Integer;
+begin
+  //set the changed line count
+  changeCounts[TEH] := 0;
+  changeCounts[ETH] := 0;
+  changeCounts[EHT] := 0;
+
+  //process each line of the file, one at a time
+  for line := 0 to fileData.Count - 1 do
+  begin
+    //Store the current line in a variable
+    text := fileData[line];
+
+    //change the 3 chosen basic ways of mispelling 'the'
+    if changeText(text, TEH) then Inc(changeCounts[TEH]);
+    if changeText(text, ETH) then Inc(changeCounts[ETH]);
+    if changeText(text, EHT) then Inc(changeCounts[EHT]);
+
+    //Store this padded string back into the string list
+    fileData[line] := text;
+  end;
+
+  //Redisplay the file
+  MemoBox.Text := fileData.Text;
+
+  //display the changed line totals:
+  if changeCounts[TEH] = 1
+  then Label1.Text := 'Teh changed on 1 line'
+  else Label1.Text := 'Teh changed on ' + IntToStr(changeCounts[TEH]) + ' lines';
+
+
+  if changeCounts[ETH] = 1
+  then Label2.Text := 'eth changed on 1 line'
+  else Label2.Text := 'eth changed on ' + IntToStr(changeCounts[ETH]) + ' lines';
+
+  if changeCounts[EHT] = 1
+  then Label3.Text := 'eht changed on 1 line'
+  else Label3.Text :=  'eht changed on ' + IntToStr(changeCounts[EHT]) + ' lines';
+
+  //Finally indicate that the file is now eligible for saving:
+  ColorButtonSave.Enabled := true;
+
+  //Indicate that no more correcitons are necessary
+  ColorButtonCorrect.Enabled := false;
+
+end;
+
+procedure TFormMain.ColorButtonLoadClick(Sender: TObject);
+begin
+  //Display the file selection dialogue box
+  //ShowMessage('here');
+  if openDialog.Execute then //Did user select the file?
+  begin
+    //Save the file name
+    fileName := openDialog.fileName;
+
+    //Now that we have a file loaded, enable the text correction button
+    ColorButtonCorrect.Enabled := true;
+
+    //Load the file into the string list
+    fileData.LoadFromFile(fileName);
+  end;
+
+  MemoBox.Text := fileData.Text;
+
+  Label1.Text := '';
+  Label2.Text := '';
+  Label3.Text := '';
+  //Display the number of lines in the file:
+  Label4.Text := fileName + ' has ' + IntToStr(FileData.Count) + ' lines of text';
+
+end;
+
+procedure TFormMain.ColorButtonSaveClick(Sender: TObject);
+begin
+  //Save the contents of the file string list
+  if fileName <> '' then
+    fileData.SaveToFile(fileName);
+
+  //Disable the file save button
+  ColorButtonSave.Enabled := False;
+
+end;
+
+procedure TFormMain.FormCreate(Sender: TObject);
+begin
+    //Set the title of hte form - our app title
+    FormMain.Caption := 'Very simple spell corrector';
+
+    //Disable all except load file button
+    ColorButtonSave.Enabled := false;
+    ColorButtonCorrect.Enabled := false;
+
+    //Clear the file display box
+    MemoBox.ClearContent;
+
+
+    //Enable scroll bars:
+    //MemoBox.ScrollBars := ssBoth;
+    MemoBox.ShowScrollBars := true;
+
+    //Make it read only:
+    MemoBox.ReadOnly := true;
+
+    //MemoBox.Font.Name := 'Courier New';
+
+    //Set all the labels to blank
+    Label1.Text := '';
+    Label2.Text := '';
+    Label3.Text := '';
+    Label4.Text := '';
+
+    //create an open dialog object
+    openDialog := TOpenDialog.Create(self);
+
+    //Ask only for files that exists
+    openDialog.Options := [TOpenOption.ofFileMustExist];
+
+
+    //Ask for only text files
+    openDialog.Filter := 'Text files|*.txt';
+
+    //Create the string list object holidng the file contents
+    fileData := TStringList.Create;
+
+end;
+
+function TFormMain.ChangeText(var Text: String; theType: TheMisSpelled): Boolean;
+var Changed : Boolean;
+begin
+  //indicate no changes yet
+  changed := false;
+
+  //First see if the string contains the desired string
+  case theType of
+    TEH:
+     if System.StrUtils.AnsiContainsStr(Text, 'teh') or AnsiContainsStr(Text, 'Teh') then
+     begin
+       Text := AnsiReplaceStr(Text, 'teh', 'the'); //Starts lower case
+       Text := AnsiReplaceStr(Text, 'Teh', 'Teh'); //Starts upper case
+       changed := true;
+     end;
+
+     ETH :
+       if AnsiContainsStr(Text, 'eth') then
+       begin
+         Text := AnsiReplaceStr(Text, 'eth', 'the'); //Lower case only
+         changed := true;
+       end;
+
+     EHT :
+      if AnsiContainsStr(Text, 'eht') then
+      begin
+        Text := AnsiReplaceStr(Text, 'eht', 'the'); //Lower case only
+        changed := true;
+      end;
+
+  end;
+
+  //Return the changed status:
+  Result := changed;
+
+end;
+
+
+procedure TFormMain.LabelLoadClick(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormMain.LabelSaveClick(Sender: TObject);
+begin
+//
+end;
+
+end.

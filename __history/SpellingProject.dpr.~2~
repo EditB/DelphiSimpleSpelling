@@ -1,0 +1,14 @@
+program SpellingProject;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  SimpleSpelling in 'SimpleSpelling.pas' {FormMain};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TFormMain, FormMain);
+  Application.Run;
+end.

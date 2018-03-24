@@ -1,0 +1,123 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object MemoBox: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 56.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 529.000000000000000000
+    Size.Height = 257.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 525.000000000000000000
+    Viewport.Height = 253.000000000000000000
+  end
+  object Label1: TLabel
+    Position.X = 56.000000000000000000
+    Position.Y = 296.000000000000000000
+    Text = 'Label1'
+    TabOrder = 1
+  end
+  object Label2: TLabel
+    Position.X = 56.000000000000000000
+    Position.Y = 320.000000000000000000
+    Text = 'Label2'
+    TabOrder = 2
+  end
+  object Label3: TLabel
+    Position.X = 56.000000000000000000
+    Position.Y = 344.000000000000000000
+    Text = 'Label3'
+    TabOrder = 3
+  end
+  object Label4: TLabel
+    Position.X = 56.000000000000000000
+    Position.Y = 368.000000000000000000
+    Size.Width = 529.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Label4'
+    TabOrder = 4
+  end
+  object ColorButtonLoad: TColorButton
+    Color = claLightskyblue
+    Position.X = 56.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    OnClick = ColorButtonLoadClick
+  end
+  object ColorButtonSave: TColorButton
+    Color = claPaleturquoise
+    Position.X = 248.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 129.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    OnClick = ColorButtonSaveClick
+  end
+  object ColorButtonCorrect: TColorButton
+    Color = claCornsilk
+    Position.X = 448.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    OnClick = ColorButtonCorrectClick
+  end
+  object LabelLoad: TLabel
+    StyledSettings = [Family]
+    Position.X = 64.000000000000000000
+    Position.Y = 408.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 18.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claBlue
+    TextSettings.HorzAlign = Center
+    Text = 'Load File'
+    TabOrder = 9
+  end
+  object LabelSave: TLabel
+    StyledSettings = [Family]
+    Position.X = 264.000000000000000000
+    Position.Y = 408.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claBlueviolet
+    TextSettings.HorzAlign = Center
+    Text = 'Save File'
+    TabOrder = 10
+  end
+  object LabelCorrect: TLabel
+    StyledSettings = [Family]
+    Position.X = 472.000000000000000000
+    Position.Y = 408.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claCoral
+    TextSettings.HorzAlign = Center
+    Text = 'Correct'
+    TabOrder = 11
+  end
+end

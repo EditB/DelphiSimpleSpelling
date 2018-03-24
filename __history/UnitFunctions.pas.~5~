@@ -1,0 +1,9 @@
+unit UnitFunctions;
+
+interface
+
+implementation
+
+function TFormMain.ChangeText(var Text: String, ): Boolean;
+
+end.
